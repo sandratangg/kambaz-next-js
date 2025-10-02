@@ -4,6 +4,7 @@ export default function Labs() {
     return (
         <div id="labs">
             <h1>Labs Table of Contents</h1>
+            <h3>Student: Sandra Tang</h3>
             <ul>
                 <li><Link href="/Labs/Lab1">Lab 1 : HTML basics</Link></li>
                 <li><Link href="/Labs/Lab2">Lab 2 : CSS basics</Link></li>
