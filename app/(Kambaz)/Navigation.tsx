@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -9,12 +9,11 @@ import { ListGroup } from "react-bootstrap";
 
 export default function KambazNavigation() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const links = [
     { name: "Account", path: "/Account", icon: FaRegCircleUser },
-    { name: "Dashboard", path: "/Dashboard?nav=dashboard", icon: AiOutlineDashboard },
-    { name: "Courses", path: "/Dashboard?nav=courses", icon: LiaBookSolid },
+    { name: "Dashboard", path: "/Dashboard", icon: AiOutlineDashboard },
+    { name: "Courses", path: "/Dashboard", icon: LiaBookSolid },
     { name: "Calendar", path: "/Calendar", icon: IoCalendarOutline },
     { name: "Inbox", path: "/Inbox", icon: FaInbox },
     { name: "Labs", path: "/Labs", icon: LiaCogSolid },
@@ -37,22 +36,7 @@ export default function KambazNavigation() {
       </ListGroup.Item>
       <br />
       {links.map(({ name, path, icon: Icon }) => {
-        // Check if current path and search params match the nav item
-        const navParam = searchParams.get('nav');
-        const isOnDashboard = pathname === '/Dashboard';
-        
-        let active = false;
-        if (isOnDashboard) {
-          // On dashboard page, check nav parameter
-          if (name === "Dashboard" && navParam === 'dashboard') active = true;
-          if (name === "Courses" && navParam === 'courses') active = true;
-          // Default to Courses if no nav param specified
-          if (name === "Courses" && !navParam) active = true;
-        } else {
-          // For other pages, use normal path matching
-          active = pathname === path.split('?')[0];
-        }
-        
+        const active = pathname === path;
         // Account icon/text logic
         const isAccount = name === "Account";
         const iconColor = active
