@@ -1,7 +1,12 @@
-export default function People() {
+// /Kambaz/Courses/[cid]/People/page.tsx
+// import PeopleTable from "../People/Table";
+
+import PeopleTable from "../../People/Table";
+
+export default function PeoplePage() {
   return (
-    <div id="wd-people">
-      <h1>People</h1>
+    <div>
+      <PeopleTable />
     </div>
   );
 }
