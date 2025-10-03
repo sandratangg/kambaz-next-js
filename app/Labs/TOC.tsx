@@ -1,7 +1,6 @@
 "use client";
 
 import { Nav } from "react-bootstrap";
-import Link from "next/link";
 export default function TOC() {
  return (
    <Nav variant="pills">

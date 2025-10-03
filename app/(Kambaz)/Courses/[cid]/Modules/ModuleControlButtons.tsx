@@ -1,6 +1,6 @@
 "use client";
 
-import { BsPlus, BsGripVertical } from "react-icons/bs";
+import { BsPlus } from "react-icons/bs";
 import LessonControlButtons from "./LessonControlButtons";
 export default function ModuleControlButtons() {
   return (

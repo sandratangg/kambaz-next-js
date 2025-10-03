@@ -38,7 +38,7 @@ export default function BootstrapLists() {
                     </ListGroup.Item>
                     <ListGroup.Item action disabled
                         href="https://en.wikipedia.org/wiki/Ender%27s_Game">
-                        Ender's Game
+                        Ender&apos;s Game
                     </ListGroup.Item>
                     <ListGroup.Item action onClick={() => alert("New book added")}>
                         Add another book

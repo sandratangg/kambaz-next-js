@@ -1,5 +1,5 @@
 "use client";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import Link from "next/link";
 
 export default function Signup() {
