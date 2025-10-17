@@ -1,16 +1,25 @@
 "use client";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import * as db from "../../../../Database";
 
 export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+  const assignment = db.assignments.find((a: any) => a._id === aid);
   const today = new Date().toISOString().split('T')[0];
+
+  if (!assignment) {
+    return <div className="p-4">Assignment not found</div>;
+  }
 
   return (
     <div id="wd-assignments-editor" className="p-4" style={{ maxWidth: 700 }}>
-      <h2>Edit Assignment</h2>
+      <h2>Edit Assignment: {assignment.title}</h2>
       <Form>
         <Form.Group className="mb-3" controlId="wd-name">
           <Form.Label>Assignment Name</Form.Label>
-          <Form.Control defaultValue="A1 - ENV + HTML" />
+          <Form.Control defaultValue={assignment.title} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="wd-description">
@@ -18,7 +27,7 @@ export default function AssignmentEditor() {
           <Form.Control
             as="textarea"
             rows={7}
-            defaultValue={`The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section Links to each of the lab assignments Link to the Kanbas application Links to all relevant source code repositories The Kanbas application should include a link to navigate back to the landing page.`}
+            defaultValue={assignment.description}
           />
         </Form.Group>
 
@@ -26,7 +35,7 @@ export default function AssignmentEditor() {
           <Col>
             <Form.Group controlId="wd-points">
               <Form.Label>Points</Form.Label>
-              <Form.Control type="number" defaultValue={100} />
+              <Form.Control type="number" defaultValue={assignment.points} />
             </Form.Group>
           </Col>
           <Col>
@@ -72,26 +81,39 @@ export default function AssignmentEditor() {
           <Col>
             <Form.Group controlId="wd-due-date">
               <Form.Label>Due</Form.Label>
-              <Form.Control type="date" defaultValue={today} />
+              <Form.Control 
+                type="date" 
+                defaultValue={assignment.dueDate} 
+              />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group controlId="wd-available-from">
               <Form.Label>Available from</Form.Label>
-              <Form.Control type="date" defaultValue={today} />
+              <Form.Control 
+                type="date" 
+                defaultValue={assignment.availableDate} 
+              />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group controlId="wd-available-until">
               <Form.Label>Until</Form.Label>
-              <Form.Control type="date" defaultValue={today} />
+              <Form.Control 
+                type="date" 
+                defaultValue={assignment.availableUntilDate} 
+              />
             </Form.Group>
           </Col>
         </Row>
 
         <div className="d-flex justify-content-end gap-2">
-          <Button variant="secondary" type="button">Cancel</Button>
-          <Button variant="primary" type="submit">Save</Button>
+          <Link href={`/Courses/${cid}/Assignments`}>
+            <Button variant="secondary" type="button">Cancel</Button>
+          </Link>
+          <Link href={`/Courses/${cid}/Assignments`}>
+            <Button variant="primary" type="submit">Save</Button>
+          </Link>
         </div>
       </Form>
     </div>

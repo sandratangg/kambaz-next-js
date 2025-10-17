@@ -1,0 +1,92 @@
+[
+  { 
+    "_id": "A101", 
+    "title": "Propulsion Assignment", 
+    "course": "RS101",
+    "description": "Study and analyze rocket propulsion systems, including chemical and electric propulsion methods. Calculate thrust, specific impulse, and efficiency parameters.",
+    "points": 100,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  },
+  { 
+    "_id": "A102", 
+    "title": "Combustion Analysis", 
+    "course": "RS101",
+    "description": "Analyze combustion processes in rocket engines and calculate efficiency parameters. Focus on temperature, pressure, and chemical reaction kinetics.",
+    "points": 85,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  },
+  { 
+    "_id": "A103", 
+    "title": "Nozzle Design Project", 
+    "course": "RS101",
+    "description": "Design and optimize rocket nozzle geometry for maximum thrust efficiency. Use computational fluid dynamics to validate your design.",
+    "points": 120,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  },
+  { 
+    "_id": "A201", 
+    "title": "Aerodynamics Quiz", 
+    "course": "RS102",
+    "description": "Test your knowledge of aerodynamic principles and flow dynamics. Covers subsonic and supersonic flow regimes.",
+    "points": 50,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  },
+  { 
+    "_id": "A202", 
+    "title": "Flow Analysis", 
+    "course": "RS102",
+    "description": "Analyze fluid flow patterns and calculate pressure distributions around various aerospace vehicle geometries.",
+    "points": 90,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  },
+  { 
+    "_id": "A203", 
+    "title": "Heating Analysis", 
+    "course": "RS102",
+    "description": "Study thermal effects and heat transfer in aerospace applications. Include convective, conductive, and radiative heat transfer.",
+    "points": 95,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  },
+  { 
+    "_id": "A301", 
+    "title": "Structural Design Task", 
+    "course": "RS103",
+    "description": "Design structural components for spacecraft and analyze stress distributions under various loading conditions.",
+    "points": 110,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  },
+  { 
+    "_id": "A302", 
+    "title": "Orbital Calculations", 
+    "course": "RS103",
+    "description": "Calculate orbital mechanics parameters including velocity, period, and trajectory for various mission scenarios.",
+    "points": 80,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  },
+  { 
+    "_id": "A303", 
+    "title": "Systems Engineering Exam", 
+    "course": "RS103",
+    "description": "Comprehensive exam covering systems engineering principles and methodologies. Includes project management and risk analysis.",
+    "points": 150,
+    "dueDate": "2025-11-15",
+    "availableDate": "2025-11-15",
+    "availableUntilDate": "2025-11-15"
+  }
+]

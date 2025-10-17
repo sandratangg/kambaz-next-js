@@ -1,13 +1,18 @@
 "use client";
 
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { FaPlus, FaSearch } from 'react-icons/fa';
 import { BsGripVertical } from 'react-icons/bs';
 import { IoEllipsisVertical } from 'react-icons/io5';
 import { PiNotePencil } from 'react-icons/pi';
 import { InputGroup, Form, Button, ListGroup } from 'react-bootstrap';
+import * as db from '../../../Database';
 
 export default function Assignments() {
+  const { cid } = useParams();
+  const assignments = db.assignments;
+
   return (
     <div id="wd-assignments" className="p-3">
       {/* Search and Controls */}
@@ -50,77 +55,34 @@ export default function Assignments() {
         </div>
 
         <ListGroup variant="flush">
-          <ListGroup.Item className="d-flex align-items-center">
-            <div className="border-start border-success border-4 ps-3 flex-grow-1">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center">
-                  <BsGripVertical className="me-2" />
-                  <Link href="/Courses/1234/Assignments/123" className="text-decoration-none">
-                    <PiNotePencil className="me-2 text-success fs-5" />
-                  </Link>
-                  <div>
-                    <Link href="/Courses/1234/Assignments/123" 
-                          className="text-decoration-none text-dark fw-bold">
-                      A1 - ENV + HTML
-                    </Link>
-                    <div className="text-muted small">
-                      Multiple Modules | <strong>Not available until</strong> May 6 at 12:00am | 
-                      <span className="text-danger"> <strong>Due</strong> May 13 at 11:59pm</span> | 100 pts
+          {assignments
+            .filter((assignment: any) => assignment.course === cid)
+            .map((assignment: any) => (
+              <ListGroup.Item key={assignment._id} className="d-flex align-items-center">
+                <div className="border-start border-success border-4 ps-3 flex-grow-1">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex align-items-center">
+                      <BsGripVertical className="me-2" />
+                      <Link href={`/Courses/${cid}/Assignments/${assignment._id}`} 
+                            className="text-decoration-none">
+                        <PiNotePencil className="me-2 text-success fs-5" />
+                      </Link>
+                      <div>
+                        <Link href={`/Courses/${cid}/Assignments/${assignment._id}`} 
+                              className="text-decoration-none text-dark fw-bold">
+                          {assignment.title}
+                        </Link>
+                        <div className="text-muted small">
+                          Multiple Modules | <strong>Not available until</strong> {assignment.availableDate} | 
+                          <span className="text-danger"> <strong>Due</strong> {assignment.dueDate}</span> | {assignment.points} pts
+                        </div>
+                      </div>
                     </div>
+                    <IoEllipsisVertical />
                   </div>
                 </div>
-                <IoEllipsisVertical />
-              </div>
-            </div>
-          </ListGroup.Item>
-
-          <ListGroup.Item className="d-flex align-items-center">
-            <div className="border-start border-success border-4 ps-3 flex-grow-1">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center">
-                  <BsGripVertical className="me-2" />
-                  <Link href="/Courses/1234/Assignments/124" className="text-decoration-none">
-                    <PiNotePencil className="me-2 text-success fs-5" />
-                  </Link>
-                  <div>
-                    <Link href="/Courses/1234/Assignments/124" 
-                          className="text-decoration-none text-dark fw-bold">
-                      A2 - CSS + BOOTSTRAP
-                    </Link>
-                    <div className="text-muted small">
-                      Multiple Modules | <strong>Not available until</strong> May 13 at 12:00am | 
-                      <span className="text-danger"> <strong>Due</strong> May 20 at 11:59pm</span> | 100 pts
-                    </div>
-                  </div>
-                </div>
-                <IoEllipsisVertical />
-              </div>
-            </div>
-          </ListGroup.Item>
-
-          <ListGroup.Item className="d-flex align-items-center">
-            <div className="border-start border-success border-4 ps-3 flex-grow-1">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center">
-                  <BsGripVertical className="me-2" />
-                  <Link href="/Courses/1234/Assignments/125" className="text-decoration-none">
-                    <PiNotePencil className="me-2 text-success fs-5" />
-                  </Link>
-                  <div>
-                    <Link href="/Courses/1234/Assignments/125" 
-                          className="text-decoration-none text-dark fw-bold">
-                      A3 - JAVASCRIPT + REACT
-                    </Link>
-                    <div className="text-muted small">
-                      Multiple Modules | <strong>Not available until</strong> May 20 at 12:00am | 
-                      <span className="text-danger"> <strong>Due</strong> May 27 at 11:59pm</span> | 100 pts
-                    </div>
-                  </div>
-                </div>
-                <IoEllipsisVertical />
-              </div>
-            </div>
-          </ListGroup.Item>
+              </ListGroup.Item>
+            ))}
         </ListGroup>
       </div>
     </div>

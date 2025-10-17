@@ -1,80 +1,39 @@
-"use client";
+"use client"
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
 
-export default function CourseNavigation() {
+export default function CoursesNavigation({ cid }: { cid: string }) {
   const pathname = usePathname();
-
-  // Define your course navigation links
   const links = [
-    { name: "Home", path: "/Courses/1234/Home" },
-    { name: "Modules", path: "/Courses/1234/Modules" },
+    { name: "Home", path: `/Courses/${cid}/Home`, external: false },
+    { name: "Modules", path: `/Courses/${cid}/Modules`, external: false },
     { name: "Piazza", path: "https://piazza.com/", external: true },
-    { name: "Zoom", path: "https://zoom.us/signin", external: true },
-    { name: "Assignments", path: "/Courses/1234/Assignments" },
-    { name: "Quizzes", path: "/Courses/1234/Quizzes" },
-    { name: "Grades", path: "/Courses/1234/Grades" },
-    { name: "People", path: "/Courses/1234/People" },
+    { name: "Zoom", path: "https://zoom.us/signin#/login", external: true },
+    { name: "Assignments", path: `/Courses/${cid}/Assignments`, external: false },
+    { name: "Quizzes", path: `/Courses/${cid}/Quizzes`, external: false },
+    { name: "Grades", path: `/Courses/${cid}/Grades`, external: false },
+    { name: "People", path: `/Courses/${cid}/People`, external: false }
   ];
 
   return (
-    <nav style={{ width: 180, padding: "20px 0" }}>
-      {links.map((link) => {
-        const active = !link.external && pathname === link.path;
-        return (
-          <div
-            key={link.name}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: 20,
-            }}
-          >
-            {active && (
-              <div
-                style={{
-                  width: 3,
-                  height: 24,
-                  background: "black",
-                  marginRight: 10,
-                  borderRadius: 2,
-                }}
-              />
-            )}
-            {link.external ? (
-              <a
-                href={link.path}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "#c00c1f",
-                  fontWeight: 400,
-                  fontSize: 20,
-                  textDecoration: "none",
-                  marginLeft: 13,
-                  transition: "color 0.1s",
-                }}
-              >
-                {link.name}
-              </a>
-            ) : (
-              <Link
-                href={link.path}
-                style={{
-                  color: active ? "black" : "#c00c1f",
-                  fontWeight: active ? 600 : 400,
-                  fontSize: 20,
-                  textDecoration: "none",
-                  marginLeft: active ? 0 : 13,
-                  transition: "color 0.1s",
-                }}
-              >
-                {link.name}
-              </Link>
-            )}
-          </div>
-        );
-      })}
-    </nav>
+    <ListGroup id="wd-courses-navigation" className="list-group fs-5 rounded-0">
+      {links.map((link) => (
+        <ListGroupItem
+          key={link.name}
+          as={link.external ? "a" : Link}
+          href={link.path}
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+          className={`border border-0 ${
+            pathname.includes(link.name) 
+              ? "active text-black bg-white" 
+              : "text-danger bg-white"
+          }`}
+        >
+          {link.name}
+        </ListGroupItem>
+      ))}
+    </ListGroup>
   );
 }

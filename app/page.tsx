@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation';
-
-export default function HomePage() {
-  redirect('/Dashboard');
+import { redirect } from "next/navigation";
+export default function Kambaz() {
+ redirect("/Account/Signin");
 }
+
