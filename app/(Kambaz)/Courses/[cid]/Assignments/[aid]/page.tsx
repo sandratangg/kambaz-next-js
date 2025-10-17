@@ -6,8 +6,7 @@ import * as db from "../../../../Database";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
-  const assignment = db.assignments.find((a: any) => a._id === aid);
-  const today = new Date().toISOString().split('T')[0];
+  const assignment = db.assignments.find((a) => a._id === aid);
 
   if (!assignment) {
     return <div className="p-4">Assignment not found</div>;

@@ -56,8 +56,8 @@ export default function Assignments() {
 
         <ListGroup variant="flush">
           {assignments
-            .filter((assignment: any) => assignment.course === cid)
-            .map((assignment: any) => (
+            .filter((assignment) => assignment.course === cid)
+            .map((assignment) => (
               <ListGroup.Item key={assignment._id} className="d-flex align-items-center">
                 <div className="border-start border-success border-4 ps-3 flex-grow-1">
                   <div className="d-flex justify-content-between align-items-center">
