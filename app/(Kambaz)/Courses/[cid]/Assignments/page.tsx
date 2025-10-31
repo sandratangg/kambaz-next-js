@@ -1,17 +1,29 @@
 "use client";
 
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FaPlus, FaSearch } from 'react-icons/fa';
+import { FaPlus, FaSearch, FaTrash } from 'react-icons/fa';
 import { BsGripVertical } from 'react-icons/bs';
 import { IoEllipsisVertical } from 'react-icons/io5';
 import { PiNotePencil } from 'react-icons/pi';
 import { InputGroup, Form, Button, ListGroup } from 'react-bootstrap';
-import * as db from '../../../Database';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteAssignment } from './reducer';
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  
+  const isFaculty = currentUser?.role === "FACULTY";
+
+  const handleDeleteAssignment = (assignmentId: string, assignmentTitle: string) => {
+    if (window.confirm(`Are you sure you want to remove "${assignmentTitle}"?`)) {
+      dispatch(deleteAssignment(assignmentId));
+    }
+  };
 
   return (
     <div id="wd-assignments" className="p-3">
@@ -33,7 +45,11 @@ export default function Assignments() {
             <FaPlus className="me-2" />
             Group
           </Button>
-          <Button variant="danger" id="wd-add-assignment">
+          <Button 
+            variant="danger" 
+            id="wd-add-assignment"
+            onClick={() => router.push(`/Courses/${cid}/Assignments/new`)}
+          >
             <FaPlus className="me-2" />
             Assignment
           </Button>
@@ -56,8 +72,8 @@ export default function Assignments() {
 
         <ListGroup variant="flush">
           {assignments
-            .filter((assignment) => assignment.course === cid)
-            .map((assignment) => (
+            .filter((assignment: any) => assignment.course === cid)
+            .map((assignment: any) => (
               <ListGroup.Item key={assignment._id} className="d-flex align-items-center">
                 <div className="border-start border-success border-4 ps-3 flex-grow-1">
                   <div className="d-flex justify-content-between align-items-center">
@@ -78,7 +94,19 @@ export default function Assignments() {
                         </div>
                       </div>
                     </div>
-                    <IoEllipsisVertical />
+                    <div className="d-flex align-items-center">
+                      {isFaculty && (
+                        <Button 
+                          variant="danger" 
+                          size="sm"
+                          className="me-2"
+                          onClick={() => handleDeleteAssignment(assignment._id, assignment.title)}
+                        >
+                          <FaTrash />
+                        </Button>
+                      )}
+                      <IoEllipsisVertical />
+                    </div>
                   </div>
                 </div>
               </ListGroup.Item>
