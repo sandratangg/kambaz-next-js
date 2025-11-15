@@ -10,6 +10,7 @@ export default function Labs() {
                 <li><Link href="/Labs/Lab2">Lab 2 : CSS basics</Link></li>
                 <li><Link href="/Labs/Lab3">Lab 3 : JavaScript basics</Link></li>
                 <li><Link href="/Labs/Lab4">Lab 4 : Redux basics</Link></li>          
+                <li><Link href="/Labs/Lab5">Lab 5 : Node.js basics</Link></li>
             </ul>
             <a id="wd-github" href="https://github.com/sandratangg/kambaz-next-js">View on GitHub</a>
         </div>

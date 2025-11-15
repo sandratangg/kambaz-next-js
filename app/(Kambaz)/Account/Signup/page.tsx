@@ -1,67 +1,50 @@
 "use client";
-import { Form, Button } from "react-bootstrap";
 import Link from "next/link";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { setCurrentUser } from "../reducer";
+import * as client from "../client";
 
 export default function Signup() {
-  return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100">
-      <div className="card shadow" style={{ width: "400px" }}>
-        <div className="card-body p-4">
-          <div className="text-center mb-4">
-            <h1 className="h3 mb-3 fw-normal">Sign up</h1>
-          </div>
-          
-          <Form>
-            <div className="form-floating mb-3">
-              <Form.Control 
-                id="wd-username" 
-                placeholder="username"
-                style={{ height: "58px" }}
-              />
-              <label htmlFor="wd-username">Username</label>
-            </div>
-            
-            <div className="form-floating mb-3">
-              <Form.Control 
-                id="wd-password" 
-                placeholder="password" 
-                type="password"
-                style={{ height: "58px" }}
-              />
-              <label htmlFor="wd-password">Password</label>
-            </div>
-            
-            <div className="form-floating mb-3">
-              <Form.Control 
-                id="wd-password-verify" 
-                placeholder="verify password" 
-                type="password"
-                style={{ height: "58px" }}
-              />
-              <label htmlFor="wd-password-verify">Verify Password</label>
-            </div>
-            
-            <Link 
-              href="/Account/Profile" 
-              className="btn btn-primary w-100 btn-lg mb-3" 
-              id="wd-signup-btn"
-              style={{ height: "48px", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center" }}
-            >
-              Sign up
-            </Link>
+  const [user, setUser] = useState<any>({});
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-            <div className="text-center">
-              <Link 
-                href="/Account/Signin" 
-                id="wd-signin-link"
-                className="text-decoration-none"
-              >
-                Already have an account? Sign in
-              </Link>
-            </div>
-          </Form>
-        </div>
-      </div>
+  const signup = async () => {
+    try {
+      const currentUser = await client.signup(user);
+      dispatch(setCurrentUser(currentUser));
+      router.push("/Account/Profile");
+    } catch (error: any) {
+      console.error(error);
+      alert(error.response?.data?.message || "Error signing up");
+    }
+  };
+
+  return (
+    <div className="wd-signup-screen">
+      <h1>Sign up</h1>
+      <input
+        value={user.username}
+        onChange={(e) => setUser({ ...user, username: e.target.value })}
+        className="wd-username form-control mb-2"
+        placeholder="username"
+      />
+      <input
+        value={user.password}
+        onChange={(e) => setUser({ ...user, password: e.target.value })}
+        className="wd-password form-control mb-2"
+        placeholder="password"
+        type="password"
+      />
+      <button onClick={signup} className="wd-signup-btn btn btn-primary mb-2 w-100">
+        Sign up
+      </button>
+      <br />
+      <Link href="/Account/Signin" className="wd-signin-link">
+        Sign in
+      </Link>
     </div>
   );
 }
